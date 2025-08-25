@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Espaço - Apartamento Cupecê</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="meu-espaco.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                        </svg>
+                        Apartamento Camilly
+                    </h1>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a>
+                    <a href="planejamento.html" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a>
+                    <a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a>
+                    <a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;" class="active">Meu Espaço</a>
+                    <a href="anotacoes.html" onclick="navigateToPage('anotacoes.html'); return false;">Anotações</a>
+                    <a href="configuracoes.html" onclick="navigateToPage('configuracoes.html'); return false;">Configurações</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <span onclick="navigateToPage('index.html')" style="cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                </svg>
+                Início
+            </span>
+            <span class="separator">></span>
+            <span class="current">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+                Meu Espaço
+            </span>
+        </div>
+    </div>
+
+    <!-- Status Indicators -->
+    <div class="status-indicators">
+        <div class="shared-data-indicator" id="sharedDataIndicator">
+            <span class="indicator-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 20V10"></path>
+                    <path d="M12 20V4"></path>
+                    <path d="M6 20v-6"></path>
+                </svg>
+            </span>
+            <span class="indicator-text">Dados Compartilhados</span>
+        </div>
+        <div class="sync-status" id="syncStatus">
+            <span class="status-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M1 20v-6h6"></path>
+                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                </svg>
+            </span>
+            <span class="status-text">Sincronizado</span>
+        </div>
+        <div class="connection-status" id="connectionStatus">
+            <span class="connection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+            </span>
+            <span class="connection-text">Conectado</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>🏠 Meu Espaço</h1>
+                <p>Conheça seu novo lar e tudo ao redor</p>
+            </div>
+
+            <!-- Apartment Info -->
+            <section class="apartment-info">
+                <div class="info-header">
+                    <h2>📍 Informações do Apartamento</h2>
+                </div>
+                
+                <div class="apartment-details">
+                    <div class="address-card">
+                        <div class="address-icon">🏢</div>
+                        <div class="address-content">
+                            <h3>Endereço</h3>
+                            <p class="address">Rua Manuel Alves de Siqueira, 51</p>
+                            <p class="neighborhood">Cupecê - São Paulo/São Paulo</p>
+                        </div>
+                    </div>
+                    
+                    <div class="apartment-images">
+                        <h3>🖼️ Imagens do Apartamento</h3>
+                        <div class="images-grid">
+                            <div class="image-card">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f8f5f1'/%3E%3Cpath d='M50 250 L350 250 L350 100 L200 50 L50 100 Z' fill='%23e6ddd4' stroke='%238b7355' stroke-width='2'/%3E%3Crect x='80' y='180' width='60' height='70' fill='%235d4e37'/%3E%3Crect x='260' y='180' width='60' height='70' fill='%235d4e37'/%3E%3Crect x='170' y='200' width='60' height='50' fill='%23a0916d'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3EFachada do Prédio%3C/text%3E%3C/svg%3E" alt="Fachada do Prédio">
+                                <p>Fachada do Prédio</p>
+                            </div>
+                            <div class="image-card">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f8ff'/%3E%3Crect x='50' y='200' width='300' height='80' fill='%2387ceeb'/%3E%3Cellipse cx='200' cy='240' rx='120' ry='30' fill='%234682b4'/%3E%3Crect x='80' y='50' width='240' height='120' fill='%23f5f5dc' stroke='%23d2b48c' stroke-width='2'/%3E%3Crect x='100' y='70' width='40' height='60' fill='%23daa520'/%3E%3Crect x='260' y='70' width='40' height='60' fill='%23daa520'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3EÁrea da Piscina%3C/text%3E%3C/svg%3E" alt="Área da Piscina">
+                                <p>Área da Piscina</p>
+                            </div>
+                            <div class="image-card">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f8f5f1'/%3E%3Crect x='50' y='80' width='300' height='180' fill='%23fff'/%3E%3Crect x='70' y='100' width='80' height='60' fill='%23e6ddd4'/%3E%3Crect x='250' y='100' width='80' height='60' fill='%23e6ddd4'/%3E%3Crect x='160' y='180' width='80' height='60' fill='%23a0916d'/%3E%3Ccircle cx='200' cy='50' r='20' fill='%23ffd700'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3ESalão de Festas%3C/text%3E%3C/svg%3E" alt="Salão de Festas">
+                                <p>Salão de Festas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map Section -->
+            <section class="map-section">
+                <h2>🗺️ Localização</h2>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <div class="map-content">
+                            <div class="map-icon">📍</div>
+                            <h3>Rua Manuel Alves de Siqueira, 51</h3>
+                            <p>Cupecê - São Paulo/SP</p>
+                            <button class="btn btn-primary" onclick="openGoogleMaps()">Ver no Google Maps</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Points of Interest -->
+            <section class="points-of-interest">
+                <h2>📍 Pontos de Interesse Próximos</h2>
+                <div class="poi-grid">
+                    <div class="poi-card transport">
+                        <div class="poi-icon">🚌</div>
+                        <div class="poi-content">
+                            <h3>Ponto de Ônibus</h3>
+                            <p class="poi-location">Av. Cupecê</p>
+                            <p class="poi-time">3min à pé</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card leisure">
+                        <div class="poi-icon">🌳</div>
+                        <div class="poi-content">
+                            <h3>Parque Nabuco</h3>
+                            <p class="poi-location">Área de lazer</p>
+                            <p class="poi-time">10min à pé</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card services">
+                        <div class="poi-icon">🏛️</div>
+                        <div class="poi-content">
+                            <h3>Poupatempo Cidade Ademar</h3>
+                            <p class="poi-location">Serviços públicos</p>
+                            <p class="poi-time">12min de ônibus</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card shopping">
+                        <div class="poi-icon">🛒</div>
+                        <div class="poi-content">
+                            <h3>DIA Supermercado</h3>
+                            <p class="poi-location">Compras diárias</p>
+                            <p class="poi-time">1min à pé</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card health">
+                        <div class="poi-icon">🏥</div>
+                        <div class="poi-content">
+                            <h3>Hospital Municipal da Vila Santa Catarina</h3>
+                            <p class="poi-location">Atendimento médico</p>
+                            <p class="poi-time">10min de ônibus</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card shopping">
+                        <div class="poi-icon">🛍️</div>
+                        <div class="poi-content">
+                            <h3>Supermercado Coqueiro</h3>
+                            <p class="poi-location">Compras</p>
+                            <p class="poi-time">7min de ônibus</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card shopping">
+                        <div class="poi-icon">🥖</div>
+                        <div class="poi-content">
+                            <h3>Mercado e Padaria Vem que Tem</h3>
+                            <p class="poi-location">Padaria e mercado</p>
+                            <p class="poi-time">9min à pé</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card education">
+                        <div class="poi-icon">🎓</div>
+                        <div class="poi-content">
+                            <h3>Escola Rei Leão/Nova Ordem</h3>
+                            <p class="poi-location">Educação</p>
+                            <p class="poi-time">10min de ônibus</p>
+                        </div>
+                    </div>
+
+                    <div class="poi-card education">
+                        <div class="poi-icon">📚</div>
+                        <div class="poi-content">
+                            <h3>Escola Professora Heloisa Carneiro</h3>
+                            <p class="poi-location">Educação</p>
+                            <p class="poi-time">13min de ônibus</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Amenities Section -->
+            <section class="amenities-section">
+                <h2>🏢 Lazer e Segurança para Você e Sua Família</h2>
+                <div class="amenities-grid">
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🍖</div>
+                        <h3>Churrasqueira</h3>
+                        <p>Área para confraternizações</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">💼</div>
+                        <h3>Coworking</h3>
+                        <p>Espaço para trabalho</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">📦</div>
+                        <h3>Espaço Delivery</h3>
+                        <p>Recebimento de encomendas</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🐕</div>
+                        <h3>Espaço Pet</h3>
+                        <p>Área para animais</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">👕</div>
+                        <h3>Lavanderia Coletiva</h3>
+                        <p>Máquinas de lavar</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🏪</div>
+                        <h3>Mini Mercado</h3>
+                        <p>Conveniência no prédio</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🐾</div>
+                        <h3>Pet Care</h3>
+                        <p>Cuidados para pets</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🏊‍♂️</div>
+                        <h3>Piscina Adulto</h3>
+                        <p>Área aquática para adultos</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🏊‍♀️</div>
+                        <h3>Piscina Infantil</h3>
+                        <p>Área aquática para crianças</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🎪</div>
+                        <h3>Playground</h3>
+                        <p>Diversão para as crianças</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🏙️</div>
+                        <h3>Rooftop</h3>
+                        <p>Vista panorâmica da cidade</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">💪</div>
+                        <h3>Sala de Ginástica</h3>
+                        <p>Academia completa</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🎉</div>
+                        <h3>Salão de Festas</h3>
+                        <p>Eventos e comemorações</p>
+                    </div>
+
+                    <div class="amenity-card">
+                        <div class="amenity-icon">☀️</div>
+                        <h3>Solarium</h3>
+                        <p>Área para relaxar ao sol</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏠 Meu Apartamento</h3>
+                    <p>Rua Manuel Alves de Siqueira, 51<br>
+                    Cupecê - São Paulo/SP</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a></li>
+                        <li><a href="planejamento.html" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a></li>
+                        <li><a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a></li>
+                        <li><a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>📧 contato@meuapartamento.com<br>
+                    📱 (11) 99999-9999</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Desenvolvedor</h4>
+                    <p>Carlos Eduardo da Silva<br>
+                    © 2025 - Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="meu-espaco.js"></script>
+</body>
+</html>

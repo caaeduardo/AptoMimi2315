@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anotações - Apartamento Cupecê</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="anotacoes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                        </svg>
+                        Meu Apartamento
+                    </h1>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a>
+                    <a href="planejamento.html" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a>
+                    <a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a>
+                    <a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a>
+                    <a href="anotacoes.html" onclick="navigateToPage('anotacoes.html'); return false;" class="active">Anotações</a>
+                    <a href="configuracoes.html" onclick="navigateToPage('configuracoes.html'); return false;">Configurações</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <span onclick="navigateToPage('index.html')" style="cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                </svg>
+                Início
+            </span>
+            <span class="separator">></span>
+            <span class="current">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14,2 14,8 20,8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10,9 9,9 8,9"></polyline>
+                </svg>
+                Anotações
+            </span>
+        </div>
+    </div>
+
+    <!-- Status Indicators -->
+    <div class="status-indicators">
+        <div class="shared-data-indicator" id="sharedDataIndicator">
+            <span class="indicator-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 20V10"></path>
+                    <path d="M12 20V4"></path>
+                    <path d="M6 20v-6"></path>
+                </svg>
+            </span>
+            <span class="indicator-text">Dados Compartilhados</span>
+        </div>
+        <div class="sync-status" id="syncStatus">
+            <span class="status-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M1 20v-6h6"></path>
+                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                </svg>
+            </span>
+            <span class="status-text">Sincronizado</span>
+        </div>
+        <div class="connection-status" id="connectionStatus">
+            <span class="connection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+            </span>
+            <span class="connection-text">Conectado</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>📝 Minhas Anotações</h1>
+                <p>Organize suas ideias e planos para o apartamento</p>
+            </div>
+
+            <!-- Biblical Quote Section -->
+            <section class="biblical-quote">
+                <div class="quote-card">
+                    <div class="quote-icon">✨</div>
+                    <div class="quote-content">
+                        <h2>Parabéns pelo seu novo lar! 🏠</h2>
+                        <blockquote>
+                            "Pela fé habitou na terra da promessa, como em terra alheia, morando em cabanas com Isaque e Jacó, herdeiros com ele da mesma promessa. Porque esperava a cidade que tem fundamentos, da qual o artífice e construtor é Deus."
+                        </blockquote>
+                        <cite>Hebreus 11:9-10</cite>
+                        <p class="blessing">
+                            Que este apartamento seja um lugar de paz, alegria e bênçãos para você e sua família. Que cada cômodo seja preenchido com amor, cada refeição seja compartilhada com gratidão, e que este lar seja um refúgio de felicidade e prosperidade. Deus abençoe abundantemente este novo capítulo da sua vida! 🙏✨
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notes Management -->
+            <section class="notes-section">
+                <div class="notes-header">
+                    <h2>📋 Suas Anotações</h2>
+                    <button class="btn btn-primary" id="addNoteBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Nova Anotação
+                    </button>
+                </div>
+
+                <!-- Notes Categories -->
+                <div class="notes-categories">
+                    <button class="category-btn active" data-category="all">Todas</button>
+                    <button class="category-btn" data-category="planejamento">Planejamento</button>
+                    <button class="category-btn" data-category="compras">Compras</button>
+                    <button class="category-btn" data-category="decoracao">Decoração</button>
+                    <button class="category-btn" data-category="mudanca">Mudança</button>
+                    <button class="category-btn" data-category="outros">Outros</button>
+                </div>
+
+                <!-- Notes Grid -->
+                <div class="notes-grid" id="notesGrid">
+                    <!-- Notes will be dynamically loaded here -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-notes" id="emptyNotes" style="display: none;">
+                    <div class="empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Nenhuma anotação encontrada</h3>
+                    <p>Comece criando sua primeira anotação sobre o apartamento</p>
+                    <button class="btn btn-primary" onclick="notesManager.openAddNoteModal()">Criar Primeira Anotação</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Note Modal -->
+    <div id="addNoteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📝 Nova Anotação</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addNoteForm">
+                    <div class="form-group">
+                        <label for="noteTitle">Título da Anotação</label>
+                        <input type="text" id="noteTitle" name="noteTitle" required placeholder="Ex: Lista de móveis para sala">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="noteCategory">Categoria</label>
+                        <select id="noteCategory" name="noteCategory" required>
+                            <option value="planejamento">Planejamento</option>
+                            <option value="compras">Compras</option>
+                            <option value="decoracao">Decoração</option>
+                            <option value="mudanca">Mudança</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="noteContent">Conteúdo</label>
+                        <textarea id="noteContent" name="noteContent" rows="8" required placeholder="Digite sua anotação aqui..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notePriority">Prioridade</label>
+                        <select id="notePriority" name="notePriority">
+                            <option value="baixa">Baixa</option>
+                            <option value="media" selected>Média</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="noteTags">Tags (separadas por vírgula)</label>
+                        <input type="text" id="noteTags" name="noteTags" placeholder="Ex: urgente, sala, móveis">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="notesManager.closeModal(document.getElementById('addNoteModal'))">Cancelar</button>
+                <button type="submit" form="addNoteForm" class="btn btn-primary">Salvar Anotação</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Note Modal -->
+    <div id="editNoteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✏️ Editar Anotação</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="editNoteForm">
+                    <input type="hidden" id="editNoteId">
+                    <div class="form-group">
+                        <label for="editNoteTitle">Título da Anotação</label>
+                        <input type="text" id="editNoteTitle" name="noteTitle" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editNoteCategory">Categoria</label>
+                        <select id="editNoteCategory" name="noteCategory" required>
+                            <option value="planejamento">Planejamento</option>
+                            <option value="compras">Compras</option>
+                            <option value="decoracao">Decoração</option>
+                            <option value="mudanca">Mudança</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editNoteContent">Conteúdo</label>
+                        <textarea id="editNoteContent" name="noteContent" rows="8" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editNotePriority">Prioridade</label>
+                        <select id="editNotePriority" name="notePriority">
+                            <option value="baixa">Baixa</option>
+                            <option value="media">Média</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editNoteTags">Tags (separadas por vírgula)</label>
+                        <input type="text" id="editNoteTags" name="noteTags">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="notesManager.closeModal(document.getElementById('editNoteModal'))">Cancelar</button>
+                <button type="submit" form="editNoteForm" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Note Modal -->
+    <div id="viewNoteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="viewNoteTitle">📖 Visualizar Anotação</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body" id="viewNoteBody">
+                <!-- Note content will be loaded here -->
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="notesManager.closeModal(document.getElementById('viewNoteModal'))">Fechar</button>
+                <button type="button" class="btn btn-primary" id="editFromViewBtn">Editar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏠 Meu Apartamento</h3>
+                    <p>Rua Manuel Alves de Siqueira, 51<br>
+                    Cupecê - São Paulo/SP</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a></li>
+                        <li><a href="planejamento.html" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a></li>
+                        <li><a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a></li>
+                        <li><a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>📧 contato@meuapartamento.com<br>
+                    📱 (11) 99999-9999</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Desenvolvedor</h4>
+                    <p>Carlos Eduardo da Silva<br>
+                    © 2025 - Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="anotacoes.js"></script>
+</body>
+</html>

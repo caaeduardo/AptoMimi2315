@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento - Apartamento Camilly</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="planejamento.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                    Apartamento Camilly
+                </h1>
+                <p>Planejamento e Organização</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="planejamento.html" class="nav-link active">Planejamento</a></li>
+                    <li><a href="#orcamentos" class="nav-link">Orçamentos</a></li>
+                    <li><a href="#meu-espaco" class="nav-link">Meu Espaço</a></li>
+                    <li><a href="#notes" class="nav-link">Notes</a></li>
+                    <li><a href="#configuracao" class="nav-link">Configuração</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb" id="breadcrumb">
+            <div class="container">
+                <a href="index.html">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                    Início
+                </a>
+                <span class="separator">›</span>
+                <span class="current" id="current-page">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Planejamento
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Planejamento do Apartamento
+                </h2>
+                <p>Organize suas compras por cômodos e acompanhe o progresso</p>
+            </section>
+            
+            <!-- Import/Export Section -->
+            <div class="import-export-section">
+                <h3>🔄 Sincronização de Dados</h3>
+                <div class="import-export-buttons">
+                    <button class="import-btn" id="importFromBudget">
+                        📥 Importar do Orçamento
+                    </button>
+                    <button class="export-btn" id="exportToOtherPages">
+                        📤 Exportar Dados
+                    </button>
+                    <button class="export-btn" id="exportRoomData">
+                        🏠 Exportar por Ambiente
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ferramentas -->
+            <section class="tools-section">
+                <div class="tools-grid">
+                    <button class="tool-btn" id="calculatorBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="16" y2="14"></line>
+                            <line x1="8" y1="18" x2="16" y2="18"></line>
+                        </svg>
+                        Calculadora
+                    </button>
+                    <button class="tool-btn" id="eventsBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Eventos
+                    </button>
+                </div>
+            </section>
+
+            <!-- Cômodos -->
+            <section class="rooms-section">
+                <!-- Sala -->
+                <div class="room-container">
+                    <div class="room-header">
+                        <h3>🛋️ SALA</h3>
+                        <div class="room-counter" id="sala-counter">0 itens</div>
+                        <div class="room-stats">
+                            <span class="stat pending">Pendente: <span id="sala-pending">0</span></span>
+                            <span class="stat completed">Comprado: <span id="sala-completed">0</span></span>
+                        </div>
+                    </div>
+                    <div class="items-list" id="sala-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+                    <button class="add-item-btn" onclick="addNewItem('sala')">+ Adicionar Item</button>
+                </div>
+
+                <!-- Quarto -->
+                <div class="room-container">
+                    <div class="room-header">
+                        <h3>🛏️ QUARTO</h3>
+                        <div class="room-counter" id="quarto-counter">0 itens</div>
+                        <div class="room-stats">
+                            <span class="stat pending">Pendente: <span id="quarto-pending">0</span></span>
+                            <span class="stat completed">Comprado: <span id="quarto-completed">0</span></span>
+                        </div>
+                    </div>
+                    <div class="items-list" id="quarto-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+                    <button class="add-item-btn" onclick="addNewItem('quarto')">+ Adicionar Item</button>
+                </div>
+
+                <!-- Cozinha -->
+                <div class="room-container">
+                    <div class="room-header">
+                        <h3>🍳 COZINHA</h3>
+                        <div class="room-counter" id="cozinha-counter">0 itens</div>
+                        <div class="room-stats">
+                            <span class="stat pending">Pendente: <span id="cozinha-pending">0</span></span>
+                            <span class="stat completed">Comprado: <span id="cozinha-completed">0</span></span>
+                        </div>
+                    </div>
+                    <div class="items-list" id="cozinha-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+                    <button class="add-item-btn" onclick="addNewItem('cozinha')">+ Adicionar Item</button>
+                </div>
+
+                <!-- Área de Varanda -->
+                <div class="room-container">
+                    <div class="room-header">
+                        <h3>🌿 ÁREA DE VARANDA</h3>
+                        <div class="room-counter" id="varanda-counter">0 itens</div>
+                        <div class="room-stats">
+                            <span class="stat pending">Pendente: <span id="varanda-pending">0</span></span>
+                            <span class="stat completed">Comprado: <span id="varanda-completed">0</span></span>
+                        </div>
+                    </div>
+                    <div class="items-list" id="varanda-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+                    <button class="add-item-btn" onclick="addNewItem('varanda')">+ Adicionar Item</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Calculadora -->
+    <div id="calculatorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Calculadora</h3>
+                <span class="close" onclick="closeModal('calculatorModal')">&times;</span>
+            </div>
+            <div class="calculator">
+                <div class="calculator-display">
+                    <input type="text" id="calculatorDisplay" readonly>
+                </div>
+                <div class="calculator-buttons">
+                    <button onclick="clearCalculator()">C</button>
+                    <button onclick="deleteLast()">⌫</button>
+                    <button onclick="appendToDisplay('/')">/</button>
+                    <button onclick="appendToDisplay('*')">×</button>
+                    
+                    <button onclick="appendToDisplay('7')">7</button>
+                    <button onclick="appendToDisplay('8')">8</button>
+                    <button onclick="appendToDisplay('9')">9</button>
+                    <button onclick="appendToDisplay('-')">-</button>
+                    
+                    <button onclick="appendToDisplay('4')">4</button>
+                    <button onclick="appendToDisplay('5')">5</button>
+                    <button onclick="appendToDisplay('6')">6</button>
+                    <button onclick="appendToDisplay('+')">+</button>
+                    
+                    <button onclick="appendToDisplay('1')">1</button>
+                    <button onclick="appendToDisplay('2')">2</button>
+                    <button onclick="appendToDisplay('3')">3</button>
+                    <button onclick="calculate()" class="equals" rowspan="2">=</button>
+                    
+                    <button onclick="appendToDisplay('0')" class="zero">0</button>
+                    <button onclick="appendToDisplay('.')">.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eventos -->
+    <div id="eventsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agenda de Eventos</h3>
+                <span class="close" onclick="closeModal('eventsModal')">&times;</span>
+            </div>
+            <div class="events-container">
+                <div class="add-event-form">
+                    <input type="text" id="eventTitle" placeholder="Título do evento">
+                    <input type="date" id="eventDate">
+                    <input type="time" id="eventTime">
+                    <select id="eventPriority">
+                        <option value="low">Baixa Prioridade</option>
+                        <option value="medium">Média Prioridade</option>
+                        <option value="high">Alta Prioridade</option>
+                    </select>
+                    <button onclick="addEvent()">Adicionar Evento</button>
+                </div>
+                <div class="events-list" id="eventsList">
+                    <!-- Eventos serão carregados via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- Shared Data Indicator -->
+    <div class="shared-data-indicator" id="sharedDataIndicator">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 20V10"></path>
+            <path d="M12 20V4"></path>
+            <path d="M6 20v-6"></path>
+        </svg>
+        Dados sincronizados
+    </div>
+    
+    <!-- Sync Status -->
+    <div class="sync-status" id="syncStatus">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 4v6h-6"></path>
+            <path d="M1 20v-6h6"></path>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+        </svg>
+        Sincronizando...
+    </div>
+    
+    <!-- Connection Status -->
+    <div class="connection-status" id="connectionStatus">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+        </svg>
+        <span>Conectado</span>
+    </div>
+    
+    <script src="planejamento.js"></script>
+</body>
+</html>

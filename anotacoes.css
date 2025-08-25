@@ -1,0 +1,76 @@
+/* Anotações Styles */
+
+/* Biblical Quote Section */
+.biblical-quote {
+    margin: 2rem 0 3rem 0;
+}
+
+.quote-card {
+    background: linear-gradient(135deg, #f8f5f1, #f0ede8);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    border: 2px solid #e6ddd4;
+    box-shadow: 0 8px 30px rgba(139, 115, 85, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+}
+
+.quote-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.quote-content {
+    position: relative;
+    z-index: 1;
+}
+
+.quote-content h2 {
+    color: #5d4e37;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.quote-content blockquote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #5d4e37;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    border-left: 4px solid #8b7355;
+    line-height: 1.6;
+    position: relative;
+}
+
