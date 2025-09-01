@@ -2,20 +2,19 @@
 class MySpaceManager {
     constructor() {
         this.apartmentAddress = 'Rua Manuel Alves de Siqueira, 51, Cupecê, São Paulo, SP';
-        this.init();
     }
 
-    init() {
-        this.setupEventListeners();
+    async init() {
+        await this.setupEventListeners();
         this.setupSharedDataIndicators();
         this.animateCards();
     }
 
-    setupEventListeners() {
+    async setupEventListeners() {
         // Setup any interactive elements
         this.setupImageGallery();
         this.setupAmenityCards();
-        this.setupPhotoCarousel();
+        await this.setupPhotoCarousel();
     }
 
     setupImageGallery() {
@@ -27,7 +26,7 @@ class MySpaceManager {
         });
     }
 
-    setupPhotoCarousel() {
+    async setupPhotoCarousel() {
         // Initialize photo carousel variables
         this.currentPhotoIndex = 0;
         this.photos = [
@@ -77,7 +76,7 @@ class MySpaceManager {
         this.nextPhotoId = 6;
         
         // Load saved photos
-        this.loadPhotos();
+        await this.loadPhotos();
         
         // Setup carousel
         this.updateCarousel();
@@ -665,11 +664,24 @@ class MySpaceManager {
         document.body.appendChild(modal);
     }
 
-    deletePhoto(index) {
+    async deletePhoto(index) {
         const photo = this.filteredPhotos[index];
         if (!photo) return;
         
         if (confirm(`Tem certeza que deseja excluir a foto "${photo.title}"?`)) {
+            try {
+                // Tentar deletar da API primeiro
+                if (window.apartmentAPI && photo.id) {
+                    const result = await window.apartmentAPI.deleteFoto(photo.id);
+                    if (result.success) {
+                        console.log('✅ Foto deletada do banco de dados online');
+                    }
+                }
+            } catch (error) {
+                console.error('❌ Erro ao deletar foto da API:', error);
+                // Continua com a exclusão local mesmo se a API falhar
+            }
+            
             // Remove from main photos array
             const photoIndex = this.photos.findIndex(p => p.id === photo.id);
             if (photoIndex !== -1) {
@@ -690,6 +702,9 @@ class MySpaceManager {
             this.rebuildCarousel();
             this.updateCarousel();
             this.updatePhotoCount();
+            
+            // Salvar mudanças
+            await this.savePhotos();
             
             this.showCarouselNotification('Foto excluída com sucesso!', 'success');
         }
@@ -795,7 +810,7 @@ class MySpaceManager {
         
         // Create file reader to convert image to data URL
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
             const newPhoto = {
                 id: this.nextPhotoId++,
                 title: formData.get('photoTitle'),
@@ -831,7 +846,7 @@ class MySpaceManager {
             }
             
             // Save photos
-            this.savePhotos();
+            await this.savePhotos();
         };
         
         reader.readAsDataURL(file);
@@ -892,17 +907,65 @@ class MySpaceManager {
         }, 3000);
     }
 
-    savePhotos() {
-        localStorage.setItem('apartamento-photos', JSON.stringify(this.photos));
+    async savePhotos() {
+        try {
+            if (window.apartmentAPI) {
+                // Salvar cada foto individualmente na API
+                for (const photo of this.photos) {
+                    await window.apartmentAPI.saveFoto(photo);
+                }
+                console.log('✅ Fotos salvas no banco de dados online');
+                if (window.showDatabaseNotification) {
+                    window.showDatabaseNotification('Fotos salvas com sucesso!', 'success');
+                }
+            } else {
+                // Fallback para localStorage
+                localStorage.setItem('apartamento-photos', JSON.stringify(this.photos));
+                console.log('💾 Fotos salvas localmente');
+            }
+        } catch (error) {
+            console.error('❌ Erro ao salvar fotos:', error);
+            // Fallback para localStorage em caso de erro
+            localStorage.setItem('apartamento-photos', JSON.stringify(this.photos));
+            if (window.showDatabaseNotification) {
+                window.showDatabaseNotification('Erro ao salvar online. Salvo localmente.', 'warning');
+            }
+        }
     }
 
-    loadPhotos() {
-        const savedPhotos = localStorage.getItem('apartamento-photos');
-        if (savedPhotos) {
-            this.photos = JSON.parse(savedPhotos);
-            this.filteredPhotos = [...this.photos];
-            // Update nextPhotoId
-            this.nextPhotoId = Math.max(...this.photos.map(p => p.id)) + 1;
+    async loadPhotos() {
+        try {
+            if (window.apartmentAPI) {
+                // Carregar fotos da API
+                const result = await window.apartmentAPI.getAllFotos();
+                if (result.success && result.data && result.data.length > 0) {
+                    this.photos = result.data;
+                    this.filteredPhotos = [...this.photos];
+                    // Update nextPhotoId
+                    this.nextPhotoId = Math.max(...this.photos.map(p => p.id || 0)) + 1;
+                    console.log(`✅ ${this.photos.length} fotos carregadas do banco de dados ${result.online ? 'online' : 'local'}`);
+                    return;
+                }
+            }
+            
+            // Fallback para localStorage
+            const savedPhotos = localStorage.getItem('apartamento-photos');
+            if (savedPhotos) {
+                this.photos = JSON.parse(savedPhotos);
+                this.filteredPhotos = [...this.photos];
+                // Update nextPhotoId
+                this.nextPhotoId = Math.max(...this.photos.map(p => p.id || 0)) + 1;
+                console.log('💾 Fotos carregadas do armazenamento local');
+            }
+        } catch (error) {
+            console.error('❌ Erro ao carregar fotos:', error);
+            // Fallback para localStorage em caso de erro
+            const savedPhotos = localStorage.getItem('apartamento-photos');
+            if (savedPhotos) {
+                this.photos = JSON.parse(savedPhotos);
+                this.filteredPhotos = [...this.photos];
+                this.nextPhotoId = Math.max(...this.photos.map(p => p.id || 0)) + 1;
+            }
         }
     }
 }
@@ -979,8 +1042,11 @@ function closeAddPhotoModal() {
 // Initialize when page loads
 let mySpaceManager;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     mySpaceManager = new MySpaceManager();
+    
+    // Wait for initialization to complete
+    await mySpaceManager.init();
     
     // Save apartment data
     mySpaceManager.saveApartmentData();

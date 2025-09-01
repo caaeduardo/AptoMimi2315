@@ -98,8 +98,8 @@ function handleDataImportExport(action) {
 }
 
 // Inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    loadData();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadData();
     renderAllRooms();
     setupEventListeners();
     loadEvents();
@@ -126,31 +126,76 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📋 Planejamento carregado com sucesso!');
 });
 
-// Carrega dados do localStorage ou usa dados iniciais
-function loadData() {
-    const savedData = localStorage.getItem('camilly-room-data');
-    if (savedData) {
-        roomData = JSON.parse(savedData);
-    } else {
-        roomData = { ...initialRoomData };
-        saveData();
-    }
-    
-    // Carrega eventos
-    const savedEvents = localStorage.getItem('camilly-events');
-    if (savedEvents) {
-        events = JSON.parse(savedEvents);
+// Carrega dados do banco de dados ou usa dados iniciais
+async function loadData() {
+    try {
+        // Tentar carregar dados do banco online
+        const result = await window.apartmentAPI.getPlanejamento('room-data');
+        if (result.success && result.data) {
+            roomData = result.data.roomData || { ...initialRoomData };
+        } else {
+            roomData = { ...initialRoomData };
+            await saveData();
+        }
+        
+        // Carrega eventos
+        const eventsResult = await window.apartmentAPI.getAllEventos();
+        if (eventsResult.success && eventsResult.data) {
+            events = eventsResult.data;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        // Fallback para localStorage
+        const savedData = localStorage.getItem('camilly-room-data');
+        if (savedData) {
+            roomData = JSON.parse(savedData);
+        } else {
+            roomData = { ...initialRoomData };
+        }
+        
+        const savedEvents = localStorage.getItem('camilly-events');
+        if (savedEvents) {
+            events = JSON.parse(savedEvents);
+        }
     }
 }
 
-// Salva dados no localStorage
-function saveData() {
-    localStorage.setItem('camilly-room-data', JSON.stringify(roomData));
+// Salva dados no banco de dados
+async function saveData() {
+    try {
+        const data = {
+            roomData: roomData,
+            lastUpdated: new Date().toISOString()
+        };
+        
+        const result = await window.apartmentAPI.savePlanejamento({
+            id: 'room-data',
+            ...data
+        });
+        
+        if (result.success) {
+            console.log('✅ Dados do planejamento salvos:', result.online ? 'online' : 'localmente');
+        }
+    } catch (error) {
+        console.error('❌ Erro ao salvar dados:', error);
+        // Fallback para localStorage
+        localStorage.setItem('camilly-room-data', JSON.stringify(roomData));
+    }
 }
 
-// Salva eventos no localStorage
-function saveEvents() {
-    localStorage.setItem('camilly-events', JSON.stringify(events));
+// Salva eventos no banco de dados
+async function saveEvents() {
+    try {
+        // Salvar cada evento individualmente
+        for (const event of events) {
+            await window.apartmentAPI.saveEvento(event);
+        }
+        console.log('✅ Eventos salvos no banco de dados');
+    } catch (error) {
+        console.error('❌ Erro ao salvar eventos:', error);
+        // Fallback para localStorage
+        localStorage.setItem('camilly-events', JSON.stringify(events));
+    }
 }
 
 // Renderiza todos os cômodos
@@ -208,11 +253,11 @@ function createItemElement(item, roomName) {
 }
 
 // Alterna status do item
-function toggleItem(roomName, itemId) {
+async function toggleItem(roomName, itemId) {
     const item = roomData[roomName].find(item => item.id === itemId);
     if (item) {
         item.completed = !item.completed;
-        saveData();
+        await saveData();
         renderRoom(roomName);
         updateRoomStats(roomName);
         
@@ -222,7 +267,7 @@ function toggleItem(roomName, itemId) {
 }
 
 // Adiciona novo item
-function addNewItem(roomName) {
+async function addNewItem(roomName) {
     const text = prompt('Digite o nome do novo item:');
     if (text && text.trim()) {
         const newItem = {
@@ -232,7 +277,7 @@ function addNewItem(roomName) {
         };
         
         roomData[roomName].push(newItem);
-        saveData();
+        await saveData();
         renderRoom(roomName);
         updateRoomStats(roomName);
         
@@ -241,13 +286,13 @@ function addNewItem(roomName) {
 }
 
 // Edita item
-function editItem(roomName, itemId) {
+async function editItem(roomName, itemId) {
     const item = roomData[roomName].find(item => item.id === itemId);
     if (item) {
         const newText = prompt('Editar item:', item.text);
         if (newText && newText.trim()) {
             item.text = newText.trim();
-            saveData();
+            await saveData();
             renderRoom(roomName);
             showNotification('Item editado!');
         }
@@ -255,10 +300,10 @@ function editItem(roomName, itemId) {
 }
 
 // Deleta item
-function deleteItem(roomName, itemId) {
+async function deleteItem(roomName, itemId) {
     if (confirm('Tem certeza que deseja excluir este item?')) {
         roomData[roomName] = roomData[roomName].filter(item => item.id !== itemId);
-        saveData();
+        await saveData();
         renderRoom(roomName);
         updateRoomStats(roomName);
         showNotification('Item excluído!');

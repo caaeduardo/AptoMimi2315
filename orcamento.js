@@ -1,16 +1,26 @@
 // Orçamento JavaScript
 class BudgetManager {
     constructor() {
-        this.products = JSON.parse(localStorage.getItem('budgetProducts')) || [];
+        this.products = [];
         this.currentTab = 'moveis';
         this.init();
     }
 
-    init() {
+    async init() {
+        await this.loadProducts();
         this.setupEventListeners();
         this.updateBudgetSummary();
         this.renderProducts();
         this.setupSharedDataIndicators();
+    }
+
+    async loadProducts() {
+        try {
+            this.products = await window.apartmentAPI.getAllOrcamentos() || [];
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            this.products = JSON.parse(localStorage.getItem('budgetProducts')) || [];
+        }
     }
 
     setupEventListeners() {
@@ -107,7 +117,7 @@ class BudgetManager {
         `;
     }
 
-    addProduct() {
+    async addProduct() {
         const form = document.getElementById('addProductForm');
         const formData = new FormData(form);
         
@@ -140,7 +150,7 @@ class BudgetManager {
         };
 
         this.products.push(product);
-        this.saveProducts();
+        await this.saveProducts();
         this.updateBudgetSummary();
         this.renderProducts();
         this.closeModal(document.getElementById('addProductModal'));
@@ -149,10 +159,10 @@ class BudgetManager {
         this.showNotification('Produto adicionado com sucesso!', 'success');
     }
 
-    deleteProduct(productId) {
+    async deleteProduct(productId) {
         if (confirm('Tem certeza que deseja excluir este produto?')) {
             this.products = this.products.filter(p => p.id !== productId);
-            this.saveProducts();
+            await this.saveProducts();
             this.updateBudgetSummary();
             this.renderProducts();
             this.showNotification('Produto excluído com sucesso!', 'success');
@@ -304,8 +314,13 @@ class BudgetManager {
         document.getElementById('totalSavings').textContent = `R$ ${totalSavings.toFixed(2)}`;
     }
 
-    saveProducts() {
-        localStorage.setItem('budgetProducts', JSON.stringify(this.products));
+    async saveProducts() {
+        try {
+            await window.apartmentAPI.saveOrcamento('budgetProducts', this.products);
+        } catch (error) {
+            console.error('Erro ao salvar produtos:', error);
+            localStorage.setItem('budgetProducts', JSON.stringify(this.products));
+        }
         this.handleDataImportExport('export', 'budgetProducts');
     }
 
@@ -433,12 +448,12 @@ class BudgetManager {
         if (!file) return;
         
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
             try {
                 const data = JSON.parse(e.target.result);
                 if (data.products && Array.isArray(data.products)) {
                     this.products = data.products;
-                    this.saveProducts();
+                    await this.saveProducts();
                     this.updateBudgetSummary();
                     this.renderProducts();
                     this.showNotification('Orçamento importado com sucesso!', 'success');
@@ -456,7 +471,7 @@ class BudgetManager {
 // Initialize budget manager when page loads
 let budgetManager;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     budgetManager = new BudgetManager();
     
     // Add CSS animations
