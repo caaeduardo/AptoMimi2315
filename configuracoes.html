@@ -11,24 +11,22 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h1>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                        </svg>
-                        Apartamento Camilly
-                    </h1>
-                </div>
-                <nav class="nav">
-                    <a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a>
-                    <a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a>
-                    <a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a>
-                    <a href="anotacoes.html" onclick="navigateToPage('anotacoes.html'); return false;">Anotações</a>
-                    <a href="configuracoes.html" class="active" onclick="navigateToPage('configuracoes.html'); return false;">Configurações</a>
-                </nav>
+            <div class="logo">
+                <h1> 
+                Apartamento Camilly
+                </h1>
+                <p>Planejamento e Organização</p>
             </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link" onclick="navigateToPage('index.html'); return false;">Home</a></li>
+                    <li><a href="planejamento.html" class="nav-link" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a></li>
+                    <li><a href="orcamento.html" class="nav-link" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a></li>
+                    <li><a href="meu-espaco.html" class="nav-link" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a></li>
+                    <li><a href="eventos.html" class="nav-link" onclick="navigateToPage('eventos.html'); return false;">Eventos</a></li>
+                    <li><a href="configuracoes.html" class="nav-link active" onclick="navigateToPage('configuracoes.html'); return false;">Configurações</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -53,68 +51,44 @@
         </div>
     </div>
 
-    <!-- Status Indicators -->
-    <div class="status-indicators">
-        <div class="container">
-            <div class="status-item" id="sharedDataIndicator">
-                <span class="status-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 20V10"></path>
-                        <path d="M12 20V4"></path>
-                        <path d="M6 20v-6"></path>
-                    </svg>
-                </span>
-                <span class="status-text">Dados Compartilhados</span>
-            </div>
-            <div class="status-item" id="syncStatus">
-                <span class="status-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M23 4v6h-6"></path>
-                        <path d="M1 20v-6h6"></path>
-                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-                    </svg>
-                </span>
-                <span class="status-text">Sincronizado</span>
-            </div>
-            <div class="status-item" id="connectionStatus">
-                <span class="status-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                    </svg>
-                </span>
-                <span class="status-text">Conectado</span>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <main class="main">
         <div class="container">
             <div class="settings-container">
                 <div class="settings-header">
                     <h2>⚙️ Configurações</h2>
-                    <p>Personalize sua experiência no Apartamento Camilly</p>
+                    <p>Gerencie sua conta e obtenha ajuda</p>
                 </div>
 
                 <div class="settings-content">
-                    <!-- Placeholder content for future development -->
-                    <div class="settings-placeholder">
-                        <div class="placeholder-icon">🚧</div>
-                        <h3>Em Desenvolvimento</h3>
-                        <p>Esta seção está sendo preparada para você!</p>
-                        <p>Em breve você poderá configurar:</p>
-                        <ul class="feature-list">
-                            <li>🎨 Tema e aparência</li>
-                            <li>🔔 Notificações</li>
-                            <li>📱 Preferências de sincronização</li>
-                            <li>🔐 Configurações de privacidade</li>
-                            <li>📊 Backup e restauração</li>
-                            <li>🌐 Idioma e região</li>
-                        </ul>
+                    <div class="simple-actions">
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16,17 21,12 16,7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                            </div>
+                            <h3>Sair</h3>
+                            <p>Encerrar sessão e voltar à tela inicial</p>
+                            <button class="action-btn logout-btn" onclick="logout()">Sair da Conta</button>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                            </div>
+                            <h3>Ajuda</h3>
+                            <p>Obtenha suporte e tire suas dúvidas</p>
+                            <button class="action-btn help-btn" onclick="showHelp()">Central de Ajuda</button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -136,7 +110,6 @@
                         <li><a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a></li>
                         <li><a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a></li>
                         <li><a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a></li>
-                        <li><a href="anotacoes.html" onclick="navigateToPage('anotacoes.html'); return false;">Anotações</a></li>
                     </ul>
                 </div>
                 

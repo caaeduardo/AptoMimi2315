@@ -11,12 +11,8 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                    </svg>
-                    Apto. 2315 - Camilly
+                <h1> 
+                Apartamento Camilly
                 </h1>
                 <p>Planejamento e Organização</p>
             </div>
@@ -24,10 +20,10 @@
                 <ul>
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="planejamento.html" class="nav-link active">Planejamento</a></li>
-                    <li><a href="#orcamentos" class="nav-link">Orçamentos</a></li>
-                    <li><a href="#meu-espaco" class="nav-link">Meu Espaço</a></li>
-                    <li><a href="#notes" class="nav-link">Notes</a></li>
-                    <li><a href="#configuracao" class="nav-link">Configuração</a></li>
+                    <li><a href="orcamento.html" class="nav-link">Orçamento</a></li>
+                    <li><a href="meu-espaco.html" class="nav-link">Meu Espaço</a></li>
+                    <li><a href="eventos.html" class="nav-link">Eventos</a></li>
+                    <li><a href="configuracoes.html" class="nav-link">Configurações</a></li>
                 </ul>
             </nav>
         </div>
@@ -68,7 +64,7 @@
                     </svg>
                     Planejamento do Apartamento
                 </h2>
-                <p>Mo véi, Aqui você Organiza suas compras por cômodos e acompanhe o progresso</p>
+                <p>Organize suas compras por cômodos e acompanhe o progresso</p>
             </section>
             
             <!-- Import/Export Section -->
@@ -86,6 +82,8 @@
                     </button>
                 </div>
             </div>
+
+           
 
             <!-- Ferramentas -->
             <section class="tools-section">
@@ -108,6 +106,16 @@
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
                         Eventos
+                    </button>
+                    <button class="tool-btn" id="advancedFormBtn" onclick="openAdvancedForm()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                        Formulário Avançado
                     </button>
                 </div>
             </section>
@@ -140,6 +148,20 @@
                             <span class="stat completed">Comprado: <span id="quarto-completed">0</span></span>
                         </div>
                     </div>
+                    
+                    <!-- Botões Enxoval e Mobília -->
+                    <div class="category-buttons">
+                        <button class="category-btn enxoval-btn" onclick="filterRoomItems('quarto', 'enxoval')">
+                            🛏️ Enxoval
+                        </button>
+                        <button class="category-btn mobilia-btn" onclick="filterRoomItems('quarto', 'mobilia')">
+                            🪑 Mobília
+                        </button>
+                        <button class="category-btn all-btn active" onclick="filterRoomItems('quarto', 'all')">
+                            📋 Todos
+                        </button>
+                    </div>
+                    
                     <div class="items-list" id="quarto-items">
                         <!-- Items serão carregados via JavaScript -->
                     </div>
@@ -156,6 +178,20 @@
                             <span class="stat completed">Comprado: <span id="cozinha-completed">0</span></span>
                         </div>
                     </div>
+                    
+                    <!-- Botões Enxoval e Mobília -->
+                    <div class="category-buttons">
+                        <button class="category-btn enxoval-btn" onclick="filterRoomItems('cozinha', 'enxoval')">
+                            🛏️ Enxoval
+                        </button>
+                        <button class="category-btn mobilia-btn" onclick="filterRoomItems('cozinha', 'mobilia')">
+                            🪑 Mobília
+                        </button>
+                        <button class="category-btn all-btn active" onclick="filterRoomItems('cozinha', 'all')">
+                            📋 Todos
+                        </button>
+                    </div>
+                    
                     <div class="items-list" id="cozinha-items">
                         <!-- Items serão carregados via JavaScript -->
                     </div>
@@ -242,6 +278,81 @@
                 <div class="events-list" id="eventsList">
                     <!-- Eventos serão carregados via JavaScript -->
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Calendário -->
+    <div class="modal" id="eventoModal">
+        <div class="modal-content calendar-modal">
+            <div class="modal-header">
+                <h2>📅 Calendário de Eventos</h2>
+                <button class="close-btn" onclick="closeEventModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="calendar-header">
+                    <button class="add-event-btn" onclick="openAddEventForm()">+ Adicionar Evento</button>
+                </div>
+                <div class="calendar-container">
+                    <div class="calendar-nav">
+                        <button onclick="previousMonth()">&lt;</button>
+                        <h3 id="currentMonth">Janeiro 2024</h3>
+                        <button onclick="nextMonth()">&gt;</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendário será gerado via JavaScript -->
+                    </div>
+                </div>
+                <div class="events-list">
+                    <h4>Eventos do Mês</h4>
+                    <div id="eventsList">
+                        <!-- Lista de eventos será carregada via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Adicionar Evento -->
+    <div class="modal" id="addEventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Adicionar Evento</h2>
+                <button class="close-btn" onclick="closeAddEventModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Título do Evento:</label>
+                        <input type="text" id="eventTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">Data:</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTime">Horário:</label>
+                        <input type="time" id="eventTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Descrição:</label>
+                        <textarea id="eventDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventCategory">Categoria:</label>
+                        <select id="eventCategory">
+                            <option value="mudanca">🏠 Mudança</option>
+                            <option value="compras">🛒 Compras</option>
+                            <option value="visita">👥 Visita</option>
+                            <option value="servicos">🔧 Serviços</option>
+                            <option value="outros">📋 Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" onclick="clearEventForm()">Limpar</button>
+                        <button type="submit">Salvar Evento</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

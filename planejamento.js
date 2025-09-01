@@ -848,6 +848,283 @@ function getCompletedItems() {
     }, 0);
 }
 
+// Funcionalidades dos Botões de Categoria
+function filterRoomItems(room, category) {
+    const buttons = document.querySelectorAll(`#${room}-container .category-btn`);
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    const activeButton = document.querySelector(`#${room}-container .category-btn[onclick*="'${category}'"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+    
+    const itemsList = document.getElementById(`${room}-items`);
+    const items = itemsList.querySelectorAll('.item');
+    
+    items.forEach(item => {
+        const itemCategory = item.dataset.category || 'all';
+        if (category === 'all' || itemCategory === category) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Funcionalidades do Calendário
+let currentDate = new Date();
+let currentMonth = currentDate.getMonth();
+let currentYear = currentDate.getFullYear();
+
+function openEventModal() {
+    document.getElementById('eventoModal').style.display = 'flex';
+    generateCalendar();
+    loadEvents();
+}
+
+function closeEventModal() {
+    document.getElementById('eventoModal').style.display = 'none';
+}
+
+function openAddEventForm() {
+    document.getElementById('addEventModal').style.display = 'flex';
+    // Definir data atual como padrão
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('eventDate').value = today;
+}
+
+function closeAddEventModal() {
+    document.getElementById('addEventModal').style.display = 'none';
+    clearEventForm();
+}
+
+function clearEventForm() {
+    document.getElementById('addEventForm').reset();
+}
+
+function previousMonth() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    generateCalendar();
+    loadEvents();
+}
+
+function nextMonth() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    generateCalendar();
+    loadEvents();
+}
+
+function generateCalendar() {
+    const monthNames = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    
+    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    
+    document.getElementById('currentMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    
+    const calendarGrid = document.getElementById('calendarGrid');
+    calendarGrid.innerHTML = '';
+    
+    // Adicionar cabeçalhos dos dias
+    dayNames.forEach(day => {
+        const dayHeader = document.createElement('div');
+        dayHeader.className = 'calendar-day-header';
+        dayHeader.textContent = day;
+        calendarGrid.appendChild(dayHeader);
+    });
+    
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+    
+    // Dias do mês anterior
+    for (let i = firstDay - 1; i >= 0; i--) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day other-month';
+        dayElement.textContent = daysInPrevMonth - i;
+        calendarGrid.appendChild(dayElement);
+    }
+    
+    // Dias do mês atual
+    const today = new Date();
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        dayElement.textContent = day;
+        
+        // Marcar dia atual
+        if (currentYear === today.getFullYear() && 
+            currentMonth === today.getMonth() && 
+            day === today.getDate()) {
+            dayElement.classList.add('today');
+        }
+        
+        // Verificar se há eventos neste dia
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayEvents = events.filter(event => event.date === dateStr);
+        if (dayEvents.length > 0) {
+            dayElement.classList.add('has-event');
+        }
+        
+        calendarGrid.appendChild(dayElement);
+    }
+    
+    // Completar com dias do próximo mês
+    const totalCells = calendarGrid.children.length;
+    const remainingCells = 42 - totalCells; // 6 semanas * 7 dias
+    for (let day = 1; day <= remainingCells; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day other-month';
+        dayElement.textContent = day;
+        calendarGrid.appendChild(dayElement);
+    }
+}
+
+function loadEvents() {
+    // Carregar eventos do localStorage
+    const storedEvents = window.CamillyNavigation?.storage?.get('events') || [];
+    events = storedEvents;
+    
+    const eventsList = document.getElementById('eventsList');
+    eventsList.innerHTML = '';
+    
+    // Filtrar eventos do mês atual
+    const monthEvents = events.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear;
+    });
+    
+    if (monthEvents.length === 0) {
+        eventsList.innerHTML = '<p style="color: #a0916d; text-align: center;">Nenhum evento neste mês</p>';
+        return;
+    }
+    
+    monthEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    monthEvents.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.className = 'event-item';
+        
+        const eventDate = new Date(event.date);
+        const formattedDate = eventDate.toLocaleDateString('pt-BR');
+        const timeStr = event.time ? ` às ${event.time}` : '';
+        
+        eventElement.innerHTML = `
+            <div class="event-info">
+                <h5>${event.title}</h5>
+                <p>${formattedDate}${timeStr}</p>
+                ${event.description ? `<p>${event.description}</p>` : ''}
+            </div>
+            <div class="event-category ${event.category}">
+                ${getCategoryIcon(event.category)} ${getCategoryName(event.category)}
+            </div>
+        `;
+        
+        eventsList.appendChild(eventElement);
+    });
+}
+
+function getCategoryIcon(category) {
+    const icons = {
+        mudanca: '🏠',
+        compras: '🛒',
+        visita: '👥',
+        servicos: '🔧',
+        outros: '📋'
+    };
+    return icons[category] || '📋';
+}
+
+function getCategoryName(category) {
+    const names = {
+        mudanca: 'Mudança',
+        compras: 'Compras',
+        visita: 'Visita',
+        servicos: 'Serviços',
+        outros: 'Outros'
+    };
+    return names[category] || 'Outros';
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener para o link Evento
+    const eventoLink = document.getElementById('eventoLink');
+    if (eventoLink) {
+        eventoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openEventModal();
+        });
+    }
+    
+    // Event listener para o formulário de adicionar evento
+    const addEventForm = document.getElementById('addEventForm');
+    if (addEventForm) {
+        addEventForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('eventTitle').value;
+            const date = document.getElementById('eventDate').value;
+            const time = document.getElementById('eventTime').value;
+            const description = document.getElementById('eventDescription').value;
+            const category = document.getElementById('eventCategory').value;
+            
+            const newEvent = {
+                id: Date.now(),
+                title,
+                date,
+                time,
+                description,
+                category
+            };
+            
+            events.push(newEvent);
+            
+            // Salvar no localStorage
+            if (window.CamillyNavigation?.storage) {
+                window.CamillyNavigation.storage.set('events', events);
+            }
+            
+            closeAddEventModal();
+            generateCalendar();
+            loadEvents();
+            
+            // Mostrar notificação
+            if (typeof showNotification === 'function') {
+                showNotification('Evento adicionado com sucesso!', 'success');
+            }
+        });
+    }
+    
+    // Fechar modais ao clicar fora
+    window.addEventListener('click', function(e) {
+        const eventoModal = document.getElementById('eventoModal');
+        const addEventModal = document.getElementById('addEventModal');
+        
+        if (e.target === eventoModal) {
+            closeEventModal();
+        }
+        if (e.target === addEventModal) {
+            closeAddEventModal();
+        }
+    });
+});
+
+// Função para abrir formulário avançado
+function openAdvancedForm() {
+    window.location.href = 'formulario.html';
+}
+
 // Exporta funções globais para uso no HTML
 window.addNewItem = addNewItem;
 window.toggleItem = toggleItem;
@@ -862,3 +1139,12 @@ window.deleteEvent = deleteEvent;
 window.closeModal = closeModal;
 window.exportRoomData = exportRoomData;
 window.importFromBudget = importFromBudget;
+window.filterRoomItems = filterRoomItems;
+window.openEventModal = openEventModal;
+window.closeEventModal = closeEventModal;
+window.openAddEventForm = openAddEventForm;
+window.closeAddEventModal = closeAddEventModal;
+window.clearEventForm = clearEventForm;
+window.previousMonth = previousMonth;
+window.nextMonth = nextMonth;
+window.openAdvancedForm = openAdvancedForm;

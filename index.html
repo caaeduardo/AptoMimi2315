@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="house-icon.ico" type="image/x-icon">
     <title>Apartamento Camilly Maciel - Gestão e Controle</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,16 +11,18 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>Apto. 2315 - Camilly</h1>
+                <h1> 
+                Apartamento Camilly
+                </h1>
                 <p>Gestão e Controle do Seu Novo Lar</p>
             </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="#home" class="nav-link active">Início</a></li>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
                     <li><a href="planejamento.html" class="nav-link">Planejamento</a></li>
                     <li><a href="orcamento.html" class="nav-link">Orçamento</a></li>
                     <li><a href="meu-espaco.html" class="nav-link">Meu Espaço</a></li>
-                    <li><a href="notes.html" class="nav-link">Anotações</a></li>
+                    <li><a href="eventos.html" class="nav-link">Eventos</a></li>
                     <li><a href="configuracoes.html" class="nav-link">Configurações</a></li>
                 </ul>
             </nav>
@@ -93,9 +96,21 @@
                                 <polyline points="10,9 9,9 8,9"></polyline>
                             </svg>
                         </div>
-                        <h3>Notes</h3>
-                        <p>Anote ideias, lembretes e inspirações para sua decoração</p>
-                        <a href="#notes" class="card-link">Acessar</a>
+                        <h3>Formulário Avançado</h3>
+                        <p>Preencha informações detalhadas sobre seu apartamento</p>
+                        <a href="formulario.html" class="card-link">Acessar</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.5-6.5l-4.24 4.24M7.76 7.76L3.52 3.52m12.96 12.96l-4.24-4.24M7.76 16.24L3.52 20.48"></path>
+                            </svg>
+                        </div>
+                        <h3>Configurações</h3>
+                        <p>Ajuste as configurações e preferências do sistema</p>
+                        <a href="configuracoes.html" class="card-link">Acessar</a>
                     </div>
                 </div>
             </section>
@@ -133,7 +148,6 @@
                         <li><a href="planejamento.html">Planejamento</a></li>
                         <li><a href="orcamento.html">Orçamento</a></li>
                         <li><a href="meu-espaco.html">Meu Espaço</a></li>
-                        <li><a href="notes.html">Anotações</a></li>
                         <li><a href="configuracoes.html">Configurações</a></li>
                     </ul>
                 </div>
@@ -151,7 +165,28 @@
         </div>
     </footer>
     
+    <!-- Popup de Boas-vindas -->
+    <div class="welcome-popup" id="welcomePopup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>🎉 Parabéns pela sua conquista!</h2>
+                <button class="close-popup" onclick="closeWelcomePopup()">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-icon">
+                    🏠💕
+                </div>
+                <h3>Bem-vinda ao seu novo lar, Camilly!</h3>
+                <p>Este é um momento muito especial na sua vida. Seu novo apartamento representa não apenas um espaço físico, mas o início de uma nova jornada cheia de possibilidades e sonhos.</p>
+                <p><strong>Eu te amo muito</strong> e estou muito orgulhoso de você por essa conquista incrível!</p>
+                <p>Este sistema foi criado especialmente para te ajudar a organizar e planejar cada detalhe do seu novo lar com muito carinho.</p>
+                <div class="popup-actions">
+                    <button class="btn-primary" onclick="closeWelcomePopup()">Começar a Planejar! 💖</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-
 </html>

@@ -400,7 +400,6 @@ class BudgetManager {
             }
         }
     }
-    }
 
     handleDataImportExport(action, dataType) {
         // Handle data import/export with visual feedback

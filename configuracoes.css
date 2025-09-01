@@ -33,9 +33,114 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 2rem;
+}
+
+/* Simple Actions */
+.simple-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.action-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+}
+
+.action-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.action-card:hover::before {
+    transform: scaleX(1);
+}
+
+.action-icon {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover .action-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.action-card h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.action-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+.logout-btn:hover {
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+}
+
+.help-btn {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+}
+
+.help-btn:hover {
+    box-shadow: 0 8px 25px rgba(23, 162, 184, 0.3);
 }
 
 /* Placeholder Styles */

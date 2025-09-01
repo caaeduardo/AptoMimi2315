@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Salva estado atual antes de navegar
                 saveNavigationState(this.textContent);
             }
+        });
     });
     
     // Animação dos cards ao carregar
@@ -247,24 +248,139 @@ function getCurrentPageName() {
     }
 }
 
-// Comunicação entre páginas
-function shareDataBetweenPages(key, data) {
-    localStorage.setItem(`camilly-shared-${key}`, JSON.stringify({
-        data: data,
-        timestamp: new Date().toISOString(),
-        source: getCurrentPageName()
-    }));
+// Sistema de localStorage persistente
+const CamillyStorage = {
+    // Prefixo para todas as chaves
+    prefix: 'camilly-app-',
     
-    // Show shared data indicator
-    showSharedDataIndicator('Dados compartilhados com sucesso!');
+    // Salvar dados com timestamp e validação
+    save(key, data, options = {}) {
+        try {
+            const storageData = {
+                data: data,
+                timestamp: new Date().toISOString(),
+                source: getCurrentPageName(),
+                version: '1.0',
+                expires: options.expires || null,
+                ...options
+            };
+            
+            localStorage.setItem(this.prefix + key, JSON.stringify(storageData));
+            
+            // Trigger storage event for other tabs
+            window.dispatchEvent(new CustomEvent('camillyStorageUpdate', {
+                detail: { key, data: storageData }
+            }));
+            
+            return true;
+        } catch (error) {
+            console.error('Erro ao salvar dados:', error);
+            return false;
+        }
+    },
+    
+    // Carregar dados com validação de expiração
+    load(key) {
+        try {
+            const stored = localStorage.getItem(this.prefix + key);
+            if (!stored) return null;
+            
+            const storageData = JSON.parse(stored);
+            
+            // Verificar expiração
+            if (storageData.expires) {
+                const expireDate = new Date(storageData.expires);
+                if (new Date() > expireDate) {
+                    this.remove(key);
+                    return null;
+                }
+            }
+            
+            return storageData;
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+            return null;
+        }
+    },
+    
+    // Remover dados
+    remove(key) {
+        localStorage.removeItem(this.prefix + key);
+    },
+    
+    // Listar todas as chaves do app
+    getAllKeys() {
+        const keys = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith(this.prefix)) {
+                keys.push(key.replace(this.prefix, ''));
+            }
+        }
+        return keys;
+    },
+    
+    // Exportar todos os dados
+    exportAll() {
+        const allData = {};
+        this.getAllKeys().forEach(key => {
+            const data = this.load(key);
+            if (data) {
+                allData[key] = data;
+            }
+        });
+        return allData;
+    },
+    
+    // Importar dados
+    importAll(data) {
+        try {
+            Object.keys(data).forEach(key => {
+                if (data[key] && data[key].data) {
+                    this.save(key, data[key].data, {
+                        imported: true,
+                        importDate: new Date().toISOString()
+                    });
+                }
+            });
+            return true;
+        } catch (error) {
+            console.error('Erro ao importar dados:', error);
+            return false;
+        }
+    },
+    
+    // Limpar dados antigos (mais de 30 dias)
+    cleanup() {
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        
+        this.getAllKeys().forEach(key => {
+            const data = this.load(key);
+            if (data && new Date(data.timestamp) < thirtyDaysAgo) {
+                this.remove(key);
+            }
+        });
+    }
+};
+
+// Comunicação entre páginas (atualizada para usar o novo sistema)
+function shareDataBetweenPages(key, data) {
+    const success = CamillyStorage.save(`shared-${key}`, data, {
+        shared: true,
+        target: 'all'
+    });
+    
+    if (success) {
+        showSharedDataIndicator('Dados compartilhados com sucesso!');
+    } else {
+        showSharedDataIndicator('Erro ao compartilhar dados', 'error');
+    }
 }
 
 function getSharedData(key) {
-    const stored = localStorage.getItem(`camilly-shared-${key}`);
-    if (stored) {
-        return JSON.parse(stored);
-    }
-    return null;
+    const stored = CamillyStorage.load(`shared-${key}`);
+    return stored ? stored.data : null;
 }
 
 // Breadcrumb navigation
@@ -393,5 +509,77 @@ window.CamillyNavigation = {
     updateConnectionStatus,
     updatePageTransition,
     showSharedDataIndicator,
-    checkForSharedData
+    checkForSharedData,
+    // Novo sistema de storage
+    storage: CamillyStorage
 };
+
+// Welcome Popup Functions
+function showWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    if (popup) {
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    if (popup) {
+        popup.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Save that user has seen the welcome popup
+        CamillyStorage.save('welcomePopupSeen', { seen: true, timestamp: Date.now() });
+    }
+}
+
+function checkWelcomePopup() {
+    const welcomeSeen = CamillyStorage.load('welcomePopupSeen');
+    
+    // Show popup if user hasn't seen it before
+    if (!welcomeSeen || !welcomeSeen.data.seen) {
+        setTimeout(() => {
+            showWelcomePopup();
+        }, 500); // Small delay for better UX
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize storage cleanup
+    CamillyStorage.cleanup();
+    
+    // Initialize breadcrumb
+    updateBreadcrumb();
+    
+    // Initialize connection status
+    updateConnectionStatus();
+    
+    // Check if we should show welcome popup (only on index page)
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
+        checkWelcomePopup();
+    }
+    
+    // Listen for storage updates
+    window.addEventListener('camillyStorageUpdate', function(event) {
+        console.log('Dados atualizados:', event.detail);
+        
+        // Show visual indicator
+        const indicator = document.querySelector('.shared-data-indicator');
+        if (indicator) {
+            indicator.style.display = 'block';
+            indicator.textContent = `Dados sincronizados: ${event.detail.key}`;
+            
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 3000);
+        } else {
+            showSharedDataIndicator('📊 Dados sincronizados entre abas');
+        }
+    });
+});
+
+// Make welcome popup functions globally available
+window.showWelcomePopup = showWelcomePopup;
+window.closeWelcomePopup = closeWelcomePopup;

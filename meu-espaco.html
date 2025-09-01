@@ -14,25 +14,22 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h1>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                        </svg>
-                        Apartamento Camilly
-                    </h1>
-                </div>
-                <nav class="nav">
-                    <a href="index.html" onclick="navigateToPage('index.html'); return false;">Início</a>
-                    <a href="planejamento.html" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a>
-                    <a href="orcamento.html" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a>
-                    <a href="meu-espaco.html" onclick="navigateToPage('meu-espaco.html'); return false;" class="active">Meu Espaço</a>
-                    <a href="anotacoes.html" onclick="navigateToPage('anotacoes.html'); return false;">Anotações</a>
-                    <a href="configuracoes.html" onclick="navigateToPage('configuracoes.html'); return false;">Configurações</a>
-                </nav>
+            <div class="logo">
+                <h1> 
+                Apartamento Camilly
+                </h1>
+                <p>Planejamento e Organização</p>
             </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link" onclick="navigateToPage('index.html'); return false;">Home</a></li>
+                    <li><a href="planejamento.html" class="nav-link" onclick="navigateToPage('planejamento.html'); return false;">Planejamento</a></li>
+                    <li><a href="orcamento.html" class="nav-link" onclick="navigateToPage('orcamento.html'); return false;">Orçamento</a></li>
+                    <li><a href="meu-espaco.html" class="nav-link active" onclick="navigateToPage('meu-espaco.html'); return false;">Meu Espaço</a></li>
+                    <li><a href="eventos.html" class="nav-link" onclick="navigateToPage('eventos.html'); return false;">Eventos</a></li>
+                    <li><a href="configuracoes.html" class="nav-link" onclick="navigateToPage('configuracoes.html'); return false;">Configurações</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -96,145 +93,408 @@
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1>🏠 Meu Espaço</h1>
-                <p>Conheça seu novo lar e tudo ao redor</p>
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27,6.96 12,12.01 20.73,6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    Meu Espaço - Apartamento Cupecê
+                </h2>
+                <p>Conheça seu novo lar, comodidades e tudo ao redor</p>
+            </section>
+            
+            <!-- Import/Export Section -->
+            <div class="import-export-section">
+                <h3>🔄 Sincronização de Dados</h3>
+                <div class="import-export-buttons">
+                    <button class="import-btn" id="importApartmentData">
+                        📥 Importar Dados do Apartamento
+                    </button>
+                    <button class="export-btn" id="exportLocationData">
+                        📤 Exportar Localização
+                    </button>
+                    <button class="export-btn" id="exportAmenityData">
+                        🏢 Exportar Comodidades
+                    </button>
+                </div>
             </div>
 
-            <!-- Apartment Info -->
-            <section class="apartment-info">
-                <div class="info-header">
-                    <h2>📍 Informações do Apartamento</h2>
+            <!-- Ferramentas -->
+            <section class="tools-section">
+                <div class="tools-grid">
+                    <button class="tool-btn" id="mapToolBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Mapa Interativo
+                    </button>
+                    <button class="tool-btn" id="amenitiesBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                        </svg>
+                        Comodidades
+                    </button>
+                    <button class="tool-btn" id="transportBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                            <path d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path>
+                        </svg>
+                        Transporte
+                    </button>
                 </div>
-                
-                <div class="apartment-details">
-                    <div class="address-card">
-                        <div class="address-icon">🏢</div>
-                        <div class="address-content">
-                            <h3>Endereço</h3>
-                            <p class="address">Rua Manuel Alves de Siqueira, 51</p>
-                            <p class="neighborhood">Cupecê - São Paulo/São Paulo</p>
+            </section>
+
+            <!-- Informações do Apartamento -->
+            <section class="apartment-section">
+                <!-- Endereço -->
+                <div class="info-container">
+                    <div class="info-header">
+                        <h3>🏢 ENDEREÇO</h3>
+                        <div class="info-counter">Cupecê - São Paulo</div>
+                    </div>
+                    <div class="address-details">
+                        <div class="address-card">
+                            <div class="address-icon">📍</div>
+                            <div class="address-content">
+                                <h4>Rua Manuel Alves de Siqueira, 51</h4>
+                                <p class="neighborhood">Cupecê - São Paulo/SP</p>
+                                <button class="btn btn-primary" onclick="openGoogleMaps()">📍 Ver no Mapa</button>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Galeria de Fotos do Imóvel -->
+                <div class="info-container">
+                    <div class="info-header">
+                        <h3>📸 FOTOS DO IMÓVEL</h3>
+                        <div class="info-counter"><span id="photoCount">5</span> fotos</div>
+                        <button class="add-photo-btn" onclick="openAddPhotoModal()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Adicionar Foto
+                        </button>
                     </div>
                     
-                    <div class="apartment-images">
-                        <h3>🖼️ Imagens do Apartamento</h3>
-                        <div class="images-grid">
-                            <div class="image-card">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f8f5f1'/%3E%3Cpath d='M50 250 L350 250 L350 100 L200 50 L50 100 Z' fill='%23e6ddd4' stroke='%238b7355' stroke-width='2'/%3E%3Crect x='80' y='180' width='60' height='70' fill='%235d4e37'/%3E%3Crect x='260' y='180' width='60' height='70' fill='%235d4e37'/%3E%3Crect x='170' y='200' width='60' height='50' fill='%23a0916d'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3EFachada do Prédio%3C/text%3E%3C/svg%3E" alt="Fachada do Prédio">
-                                <p>Fachada do Prédio</p>
-                            </div>
-                            <div class="image-card">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f8ff'/%3E%3Crect x='50' y='200' width='300' height='80' fill='%2387ceeb'/%3E%3Cellipse cx='200' cy='240' rx='120' ry='30' fill='%234682b4'/%3E%3Crect x='80' y='50' width='240' height='120' fill='%23f5f5dc' stroke='%23d2b48c' stroke-width='2'/%3E%3Crect x='100' y='70' width='40' height='60' fill='%23daa520'/%3E%3Crect x='260' y='70' width='40' height='60' fill='%23daa520'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3EÁrea da Piscina%3C/text%3E%3C/svg%3E" alt="Área da Piscina">
-                                <p>Área da Piscina</p>
-                            </div>
-                            <div class="image-card">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f8f5f1'/%3E%3Crect x='50' y='80' width='300' height='180' fill='%23fff'/%3E%3Crect x='70' y='100' width='80' height='60' fill='%23e6ddd4'/%3E%3Crect x='250' y='100' width='80' height='60' fill='%23e6ddd4'/%3E%3Crect x='160' y='180' width='80' height='60' fill='%23a0916d'/%3E%3Ccircle cx='200' cy='50' r='20' fill='%23ffd700'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3ESalão de Festas%3C/text%3E%3C/svg%3E" alt="Salão de Festas">
-                                <p>Salão de Festas</p>
+                    <!-- Carrossel de Fotos -->
+                    <div class="photo-carousel">
+                        <button class="carousel-btn prev" onclick="previousPhoto()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15,18 9,12 15,6"></polyline>
+                            </svg>
+                        </button>
+                        
+                        <div class="carousel-container">
+                            <div class="carousel-track" id="carouselTrack">
+                                <!-- Foto 1 - Fachada -->
+                                <div class="photo-card active" data-category="exterior">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f8f5f1'/%3E%3Cpath d='M50 250 L350 250 L350 100 L200 50 L50 100 Z' fill='%23e6ddd4' stroke='%238b7355' stroke-width='2'/%3E%3Crect x='80' y='180' width='60' height='70' fill='%235d4e37'/%3E%3Crect x='260' y='180' width='60' height='70' fill='%235d4e37'/%3E%3Crect x='170' y='200' width='60' height='50' fill='%23a0916d'/%3E%3C/svg%3E" alt="Fachada do Prédio">
+                                    <div class="photo-overlay">
+                                        <div class="photo-info">
+                                            <h4>🏢 Fachada do Prédio</h4>
+                                            <p>Vista externa do edifício</p>
+                                            <span class="photo-category">Exterior</span>
+                                        </div>
+                                        <div class="photo-actions">
+                                            <button class="photo-action-btn" onclick="viewFullPhoto(0)" title="Ver em tela cheia">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="photo-action-btn delete" onclick="deletePhoto(0)" title="Excluir foto">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Foto 2 - Piscina -->
+                                <div class="photo-card" data-category="lazer">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f8ff'/%3E%3Crect x='50' y='200' width='300' height='80' fill='%2387ceeb'/%3E%3Cellipse cx='200' cy='240' rx='120' ry='30' fill='%234682b4'/%3E%3Crect x='80' y='50' width='240' height='120' fill='%23f5f5dc' stroke='%23d2b48c' stroke-width='2'/%3E%3C/svg%3E" alt="Área da Piscina">
+                                    <div class="photo-overlay">
+                                        <div class="photo-info">
+                                            <h4>🏊 Área da Piscina</h4>
+                                            <p>Área de lazer com piscina</p>
+                                            <span class="photo-category">Lazer</span>
+                                        </div>
+                                        <div class="photo-actions">
+                                            <button class="photo-action-btn" onclick="viewFullPhoto(1)" title="Ver em tela cheia">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="photo-action-btn delete" onclick="deletePhoto(1)" title="Excluir foto">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Foto 3 - Salão de Festas -->
+                                <div class="photo-card" data-category="lazer">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f8f5f1'/%3E%3Crect x='50' y='80' width='300' height='180' fill='%23fff'/%3E%3Crect x='70' y='100' width='80' height='60' fill='%23e6ddd4'/%3E%3Crect x='250' y='100' width='80' height='60' fill='%23e6ddd4'/%3E%3Crect x='160' y='180' width='80' height='60' fill='%23a0916d'/%3E%3Ccircle cx='200' cy='50' r='20' fill='%23ffd700'/%3E%3C/svg%3E" alt="Salão de Festas">
+                                    <div class="photo-overlay">
+                                        <div class="photo-info">
+                                            <h4>🎉 Salão de Festas</h4>
+                                            <p>Espaço para eventos e comemorações</p>
+                                            <span class="photo-category">Lazer</span>
+                                        </div>
+                                        <div class="photo-actions">
+                                            <button class="photo-action-btn" onclick="viewFullPhoto(2)" title="Ver em tela cheia">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="photo-action-btn delete" onclick="deletePhoto(2)" title="Excluir foto">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Foto 4 - Apartamento Interior -->
+                                <div class="photo-card" data-category="interior">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f5f5f5'/%3E%3Crect x='50' y='50' width='300' height='200' fill='%23fff'/%3E%3Crect x='70' y='70' width='100' height='80' fill='%23e8e8e8'/%3E%3Crect x='230' y='70' width='100' height='80' fill='%23d4d4d4'/%3E%3Crect x='70' y='170' width='260' height='60' fill='%23c8c8c8'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3ESala de Estar%3C/text%3E%3C/svg%3E" alt="Sala de Estar">
+                                    <div class="photo-overlay">
+                                        <div class="photo-info">
+                                            <h4>🛋️ Sala de Estar</h4>
+                                            <p>Ambiente interno do apartamento</p>
+                                            <span class="photo-category">Interior</span>
+                                        </div>
+                                        <div class="photo-actions">
+                                            <button class="photo-action-btn" onclick="viewFullPhoto(3)" title="Ver em tela cheia">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="photo-action-btn delete" onclick="deletePhoto(3)" title="Excluir foto">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Foto 5 - Cozinha -->
+                                <div class="photo-card" data-category="interior">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f9f9f9'/%3E%3Crect x='50' y='50' width='300' height='200' fill='%23fff'/%3E%3Crect x='70' y='70' width='80' height='120' fill='%23e0e0e0'/%3E%3Crect x='170' y='70' width='160' height='60' fill='%23d0d0d0'/%3E%3Crect x='170' y='150' width='160' height='40' fill='%23c0c0c0'/%3E%3Ccircle cx='200' cy='110' r='15' fill='%23333'/%3E%3Ccircle cx='250' cy='110' r='15' fill='%23333'/%3E%3Ctext x='200' y='280' text-anchor='middle' fill='%235d4e37' font-family='Arial' font-size='14'%3ECozinha%3C/text%3E%3C/svg%3E" alt="Cozinha">
+                                    <div class="photo-overlay">
+                                        <div class="photo-info">
+                                            <h4>👩‍🍳 Cozinha</h4>
+                                            <p>Área gourmet do apartamento</p>
+                                            <span class="photo-category">Interior</span>
+                                        </div>
+                                        <div class="photo-actions">
+                                            <button class="photo-action-btn" onclick="viewFullPhoto(4)" title="Ver em tela cheia">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="photo-action-btn delete" onclick="deletePhoto(4)" title="Excluir foto">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
+                        <button class="carousel-btn next" onclick="nextPhoto()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Indicadores do Carrossel -->
+                    <div class="carousel-indicators">
+                        <button class="indicator active" onclick="goToPhoto(0)"></button>
+                        <button class="indicator" onclick="goToPhoto(1)"></button>
+                        <button class="indicator" onclick="goToPhoto(2)"></button>
+                        <button class="indicator" onclick="goToPhoto(3)"></button>
+                        <button class="indicator" onclick="goToPhoto(4)"></button>
+                    </div>
+                    
+                    <!-- Filtros de Categoria -->
+                    <div class="photo-filters">
+                        <button class="filter-btn active" onclick="filterPhotos('all')">Todas</button>
+                        <button class="filter-btn" onclick="filterPhotos('exterior')">Exterior</button>
+                        <button class="filter-btn" onclick="filterPhotos('interior')">Interior</button>
+                        <button class="filter-btn" onclick="filterPhotos('lazer')">Lazer</button>
                     </div>
                 </div>
             </section>
 
-            <!-- Map Section -->
-            <section class="map-section">
-                <h2>🗺️ Localização</h2>
-                <div class="map-container">
-                    <div class="map-placeholder">
-                        <div class="map-content">
-                            <div class="map-icon">📍</div>
-                            <h3>Rua Manuel Alves de Siqueira, 51</h3>
-                            <p>Cupecê - São Paulo/SP</p>
-                            <button class="btn btn-primary" onclick="openGoogleMaps()">Ver no Google Maps</button>
+            <!-- Pontos de Interesse -->
+            <section class="poi-section">
+                <!-- Transporte -->
+                <div class="poi-container">
+                    <div class="poi-header">
+                        <h3>🚌 TRANSPORTE</h3>
+                        <div class="poi-counter">2 locais</div>
+                        <div class="poi-stats">
+                            <span class="stat nearby">Próximo: <span id="transport-nearby">2</span></span>
+                        </div>
+                    </div>
+                    <div class="poi-list" id="transport-items">
+                        <div class="poi-item" onclick="showLocationDetails('Av. Cupecê')">
+                            <div class="poi-icon">🚌</div>
+                            <div class="poi-content">
+                                <h4>Ponto de Ônibus</h4>
+                                <p class="poi-location">Av. Cupecê</p>
+                                <span class="poi-time nearby">3min à pé</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Points of Interest -->
-            <section class="points-of-interest">
-                <h2>📍 Pontos de Interesse Próximos</h2>
-                <div class="poi-grid">
-                    <div class="poi-card transport">
-                        <div class="poi-icon">🚌</div>
-                        <div class="poi-content">
-                            <h3>Ponto de Ônibus</h3>
-                            <p class="poi-location">Av. Cupecê</p>
-                            <p class="poi-time">3min à pé</p>
+                <!-- Lazer -->
+                <div class="poi-container">
+                    <div class="poi-header">
+                        <h3>🌳 LAZER</h3>
+                        <div class="poi-counter">1 local</div>
+                        <div class="poi-stats">
+                            <span class="stat nearby">Próximo: <span id="leisure-nearby">1</span></span>
                         </div>
                     </div>
-
-                    <div class="poi-card leisure">
-                        <div class="poi-icon">🌳</div>
-                        <div class="poi-content">
-                            <h3>Parque Nabuco</h3>
-                            <p class="poi-location">Área de lazer</p>
-                            <p class="poi-time">10min à pé</p>
+                    <div class="poi-list" id="leisure-items">
+                        <div class="poi-item" onclick="showLocationDetails('Parque Nabuco')">
+                            <div class="poi-icon">🌳</div>
+                            <div class="poi-content">
+                                <h4>Parque Nabuco</h4>
+                                <p class="poi-location">Área de lazer</p>
+                                <span class="poi-time nearby">10min à pé</span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="poi-card services">
-                        <div class="poi-icon">🏛️</div>
-                        <div class="poi-content">
-                            <h3>Poupatempo Cidade Ademar</h3>
-                            <p class="poi-location">Serviços públicos</p>
-                            <p class="poi-time">12min de ônibus</p>
+                <!-- Serviços -->
+                <div class="poi-container">
+                    <div class="poi-header">
+                        <h3>🏛️ SERVIÇOS</h3>
+                        <div class="poi-counter">1 local</div>
+                        <div class="poi-stats">
+                            <span class="stat medium">Médio: <span id="services-medium">1</span></span>
                         </div>
                     </div>
-
-                    <div class="poi-card shopping">
-                        <div class="poi-icon">🛒</div>
-                        <div class="poi-content">
-                            <h3>DIA Supermercado</h3>
-                            <p class="poi-location">Compras diárias</p>
-                            <p class="poi-time">1min à pé</p>
+                    <div class="poi-list" id="services-items">
+                        <div class="poi-item" onclick="showLocationDetails('Poupatempo Cidade Ademar')">
+                            <div class="poi-icon">🏛️</div>
+                            <div class="poi-content">
+                                <h4>Poupatempo Cidade Ademar</h4>
+                                <p class="poi-location">Serviços públicos</p>
+                                <span class="poi-time medium">12min de ônibus</span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="poi-card health">
-                        <div class="poi-icon">🏥</div>
-                        <div class="poi-content">
-                            <h3>Hospital Municipal da Vila Santa Catarina</h3>
-                            <p class="poi-location">Atendimento médico</p>
-                            <p class="poi-time">10min de ônibus</p>
+                <!-- Compras -->
+                <div class="poi-container">
+                    <div class="poi-header">
+                        <h3>🛒 COMPRAS</h3>
+                        <div class="poi-counter">3 locais</div>
+                        <div class="poi-stats">
+                            <span class="stat nearby">Próximo: <span id="shopping-nearby">3</span></span>
                         </div>
                     </div>
-
-                    <div class="poi-card shopping">
-                        <div class="poi-icon">🛍️</div>
-                        <div class="poi-content">
-                            <h3>Supermercado Coqueiro</h3>
-                            <p class="poi-location">Compras</p>
-                            <p class="poi-time">7min de ônibus</p>
+                    <div class="poi-list" id="shopping-items">
+                        <div class="poi-item" onclick="showLocationDetails('DIA Supermercado')">
+                            <div class="poi-icon">🛒</div>
+                            <div class="poi-content">
+                                <h4>DIA Supermercado</h4>
+                                <p class="poi-location">Compras diárias</p>
+                                <span class="poi-time nearby">1min à pé</span>
+                            </div>
+                        </div>
+                        <div class="poi-item" onclick="showLocationDetails('Supermercado Coqueiro')">
+                            <div class="poi-icon">🛒</div>
+                            <div class="poi-content">
+                                <h4>Supermercado Coqueiro</h4>
+                                <p class="poi-location">Compras gerais</p>
+                                <span class="poi-time nearby">7min de ônibus</span>
+                            </div>
+                        </div>
+                        <div class="poi-item" onclick="showLocationDetails('Mercado e Padaria Vem que Tem')">
+                            <div class="poi-icon">🥖</div>
+                            <div class="poi-content">
+                                <h4>Mercado e Padaria Vem que Tem</h4>
+                                <p class="poi-location">Padaria e mercado</p>
+                                <span class="poi-time nearby">9min à pé</span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="poi-card shopping">
-                        <div class="poi-icon">🥖</div>
-                        <div class="poi-content">
-                            <h3>Mercado e Padaria Vem que Tem</h3>
-                            <p class="poi-location">Padaria e mercado</p>
-                            <p class="poi-time">9min à pé</p>
+                <!-- Saúde -->
+                <div class="poi-container">
+                    <div class="poi-header">
+                        <h3>🏥 SAÚDE</h3>
+                        <div class="poi-counter">1 local</div>
+                        <div class="poi-stats">
+                            <span class="stat medium">Médio: <span id="health-medium">1</span></span>
                         </div>
                     </div>
-
-                    <div class="poi-card education">
-                        <div class="poi-icon">🎓</div>
-                        <div class="poi-content">
-                            <h3>Escola Rei Leão/Nova Ordem</h3>
-                            <p class="poi-location">Educação</p>
-                            <p class="poi-time">10min de ônibus</p>
+                    <div class="poi-list" id="health-items">
+                        <div class="poi-item" onclick="showLocationDetails('Hospital Municipal da Vila Santa Catarina')">
+                            <div class="poi-icon">🏥</div>
+                            <div class="poi-content">
+                                <h4>Hospital Municipal da Vila Santa Catarina</h4>
+                                <p class="poi-location">Atendimento médico</p>
+                                <span class="poi-time medium">10min de ônibus</span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="poi-card education">
-                        <div class="poi-icon">📚</div>
-                        <div class="poi-content">
-                            <h3>Escola Professora Heloisa Carneiro</h3>
-                            <p class="poi-location">Educação</p>
-                            <p class="poi-time">13min de ônibus</p>
+                <!-- Educação -->
+                <div class="poi-container">
+                    <div class="poi-header">
+                        <h3>🎓 EDUCAÇÃO</h3>
+                        <div class="poi-counter">2 locais</div>
+                        <div class="poi-stats">
+                            <span class="stat medium">Médio: <span id="education-medium">2</span></span>
+                        </div>
+                    </div>
+                    <div class="poi-list" id="education-items">
+                        <div class="poi-item" onclick="showLocationDetails('Escola Rei Leão/Nova Ordem')">
+                            <div class="poi-icon">🎓</div>
+                            <div class="poi-content">
+                                <h4>Escola Rei Leão/Nova Ordem</h4>
+                                <p class="poi-location">Ensino fundamental</p>
+                                <span class="poi-time medium">10min de ônibus</span>
+                            </div>
+                        </div>
+                        <div class="poi-item" onclick="showLocationDetails('Escola Professora Heloisa Carneiro')">
+                            <div class="poi-icon">🎓</div>
+                            <div class="poi-content">
+                                <h4>Escola Professora Heloisa Carneiro</h4>
+                                <p class="poi-location">Ensino público</p>
+                                <span class="poi-time medium">13min de ônibus</span>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Avançado - Camilly Apartamento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1> 
+                Apartamento Camilly
+                </h1>
+                <p>Planejamento e Organização</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="planejamento.html" class="nav-link">Planejamento</a></li>
+                    <li><a href="orcamento.html" class="nav-link">Orçamento</a></li>
+                    <li><a href="meu-espaco.html" class="nav-link">Meu Espaço</a></li>
+                    <li><a href="configuracoes.html" class="nav-link">Configurações</a></li>
+                </ul>
+            </nav>
+        </div>
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10,9 9,9 8,9"></polyline>
+                    </svg>
+                    Formulário Avançado
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10,9 9,9 8,9"></polyline>
+                    </svg>
+                    Formulário Avançado de Planejamento
+                </h2>
+                <p>Complete o planejamento detalhado do seu apartamento com todas as informações necessárias</p>
+            </section>
+
+            <!-- Formulário Avançado -->
+            <section class="advanced-form-section">
+                <form id="advancedPlanningForm" class="advanced-form">
+                    <!-- Informações Básicas do Item -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path>
+                            </svg>
+                            Informações Básicas
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemName">Nome do Item *</label>
+                                <input type="text" id="advItemName" name="itemName" required placeholder="Ex: Sofá 3 lugares">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemRoom">Cômodo *</label>
+                                <select id="advItemRoom" name="itemRoom" required>
+                                    <option value="">Selecione o cômodo</option>
+                                    <option value="sala">🛋️ Sala</option>
+                                    <option value="quarto">🛏️ Quarto</option>
+                                    <option value="cozinha">🍳 Cozinha</option>
+                                    <option value="varanda">🌿 Área de Varanda</option>
+                                    <option value="banheiro">🚿 Banheiro</option>
+                                    <option value="lavanderia">🧺 Lavanderia</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemCategory">Categoria *</label>
+                                <select id="advItemCategory" name="itemCategory" required>
+                                    <option value="">Selecione a categoria</option>
+                                    <option value="moveis">🪑 Móveis</option>
+                                    <option value="eletrodomesticos">⚡ Eletrodomésticos</option>
+                                    <option value="decoracao">🎨 Decoração</option>
+                                    <option value="enxoval">🛏️ Enxoval</option>
+                                    <option value="mobilia">🏠 Mobília</option>
+                                    <option value="utensilios">🍴 Utensílios</option>
+                                    <option value="limpeza">🧽 Limpeza</option>
+                                    <option value="outros">📦 Outros</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemPriority">Prioridade *</label>
+                                <select id="advItemPriority" name="itemPriority" required>
+                                    <option value="baixa">🟢 Baixa</option>
+                                    <option value="media" selected>🟡 Média</option>
+                                    <option value="alta">🔴 Alta</option>
+                                    <option value="urgente">🚨 Urgente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informações Financeiras -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            Informações Financeiras
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemPrice">Preço Estimado (R$)</label>
+                                <input type="number" id="advItemPrice" name="itemPrice" min="0" step="0.01" placeholder="0,00">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemMaxPrice">Preço Máximo (R$)</label>
+                                <input type="number" id="advItemMaxPrice" name="itemMaxPrice" min="0" step="0.01" placeholder="0,00">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemStore">Loja/Local Preferido</label>
+                                <input type="text" id="advItemStore" name="itemStore" placeholder="Ex: Magazine Luiza, Casas Bahia">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemPayment">Forma de Pagamento</label>
+                                <select id="advItemPayment" name="itemPayment">
+                                    <option value="">Selecione</option>
+                                    <option value="avista">💰 À Vista</option>
+                                    <option value="cartao">💳 Cartão de Crédito</option>
+                                    <option value="parcelado">📅 Parcelado</option>
+                                    <option value="financiamento">🏦 Financiamento</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Especificações Técnicas -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"></polyline>
+                            </svg>
+                            Especificações e Detalhes
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemBrand">Marca Preferida</label>
+                                <input type="text" id="advItemBrand" name="itemBrand" placeholder="Ex: Samsung, LG, Tok&Stok">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemModel">Modelo/Referência</label>
+                                <input type="text" id="advItemModel" name="itemModel" placeholder="Ex: Smart TV 55 polegadas">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemColor">Cor Preferida</label>
+                                <input type="text" id="advItemColor" name="itemColor" placeholder="Ex: Branco, Preto, Madeira">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemSize">Tamanho/Dimensões</label>
+                                <input type="text" id="advItemSize" name="itemSize" placeholder="Ex: 2,00m x 1,50m">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="advItemSpecs">Especificações Técnicas</label>
+                            <textarea id="advItemSpecs" name="itemSpecs" rows="3" placeholder="Descreva características técnicas importantes, voltagem, consumo, etc."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Planejamento e Cronograma -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Planejamento e Cronograma
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemDeadline">Data Limite para Compra</label>
+                                <input type="date" id="advItemDeadline" name="itemDeadline">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemDelivery">Data Prevista de Entrega</label>
+                                <input type="date" id="advItemDelivery" name="itemDelivery">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advItemStatus">Status Atual</label>
+                                <select id="advItemStatus" name="itemStatus">
+                                    <option value="planejado">📋 Planejado</option>
+                                    <option value="pesquisando">🔍 Pesquisando</option>
+                                    <option value="orcamento">💰 Orçamento</option>
+                                    <option value="aprovado">✅ Aprovado</option>
+                                    <option value="comprado">🛒 Comprado</option>
+                                    <option value="entregue">📦 Entregue</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="advItemQuantity">Quantidade</label>
+                                <input type="number" id="advItemQuantity" name="itemQuantity" min="1" value="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Observações e Links -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                            Observações e Referências
+                        </h3>
+                        
+                        <div class="form-group full-width">
+                            <label for="advItemNotes">Observações Gerais</label>
+                            <textarea id="advItemNotes" name="itemNotes" rows="4" placeholder="Observações adicionais, preferências, restrições, etc."></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="advItemLinks">Links de Referência</label>
+                            <textarea id="advItemLinks" name="itemLinks" rows="3" placeholder="Cole aqui links de produtos, inspirações, lojas, etc. (um por linha)"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="form-actions advanced-actions">
+                        <button type="button" class="btn-secondary" onclick="clearAdvancedForm()">🗑️ Limpar Formulário</button>
+                        <button type="button" class="btn-secondary" onclick="saveAsDraft()">💾 Salvar Rascunho</button>
+                        <button type="submit" class="btn-primary">✅ Salvar Item Completo</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="planejamento.html">Planejamento</a></li>
+                        <li><a href="orcamento.html">Orçamento</a></li>
+                        <li><a href="meu-espaco.html">Meu Espaço</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>📧 camilly@apartamento.com</p>
+                    <p>📱 (11) 99999-9999</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#">📘 Facebook</a>
+                        <a href="#">📷 Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Camilly Apartamento. Feito com 💖</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Indicadores de Status -->
+    <div class="shared-data-indicator" style="display: none;"></div>
+    <div class="sync-status-indicator" style="display: none;"></div>
+    <div class="connection-status-indicator" style="display: none;"></div>
+
+    <script src="script.js"></script>
+    <script src="formulario.js"></script>
+</body>
+</html>
